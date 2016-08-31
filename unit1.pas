@@ -15,11 +15,13 @@ type
   TForm1 = class(TForm)
     ChooseFileButton: TButton;
     Label1: TLabel;
+    ChooseFileDialog: TOpenDialog;
     RGBLabel: TLabel;
     SaveFileButton: TButton;
     Image1: TImage;
     Panel1: TPanel;
     DiscolorToggle: TToggleBox;
+    procedure ChooseFileButtonClick(Sender: TObject);
     procedure Image1MouseMove(Sender: TObject; Shift: TShiftState; X, Y: Integer
       );
     procedure GetRGB(Col: TColor; var R, G, B: Byte);
@@ -48,6 +50,17 @@ begin
   GetRGB(ColNumb, R, G, B);
 
   RGBLabel.Caption := IntToStr(R) + ', ' + IntToStr(G) + ', ' + IntToStr(B);
+end;
+
+procedure TForm1.ChooseFileButtonClick(Sender: TObject);
+var
+  Filename: string;
+begin
+  if ChooseFileDialog.Execute then
+  begin
+    Filename := ChooseFileDialog.Filename;
+    ShowMessage(Filename);
+  end;
 end;
 
 procedure TForm1.GetRGB(Col: TColor; var R, G, B: Byte);

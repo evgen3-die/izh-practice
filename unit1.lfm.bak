@@ -6849,6 +6849,7 @@ object Form1: TForm1
       Top = 24
       Width = 80
       Caption = 'Выбрать'
+      OnClick = ChooseFileButtonClick
       TabOrder = 0
     end
     object SaveFileButton: TButton
@@ -6882,5 +6883,10 @@ object Form1: TForm1
       Caption = 'Обесцветить'
       TabOrder = 2
     end
+  end
+  object ChooseFileDialog: TOpenDialog
+    Filter = '.jpg|.jpg|.bmp|.bmp'
+    left = 672
+    top = 520
   end
 end
