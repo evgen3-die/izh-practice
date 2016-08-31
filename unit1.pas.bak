@@ -13,12 +13,16 @@ type
   { TForm1 }
 
   TForm1 = class(TForm)
-    ChooseFile: TButton;
+    ChooseFileButton: TButton;
     Label1: TLabel;
     RGBLabel: TLabel;
-    SaveFile: TButton;
+    SaveFileButton: TButton;
     Image1: TImage;
     Panel1: TPanel;
+    DiscolorToggle: TToggleBox;
+    procedure Image1MouseMove(Sender: TObject; Shift: TShiftState; X, Y: Integer
+      );
+    procedure GetRGB(Col: TColor; var R, G, B: Byte);
   private
     { private declarations }
   public
@@ -31,6 +35,30 @@ var
 implementation
 
 {$R *.lfm}
+
+{ TForm1 }
+
+procedure TForm1.Image1MouseMove(Sender: TObject; Shift: TShiftState; X,
+  Y: Integer);
+var
+  ColNumb: TColor;
+  R, G, B: Byte;
+begin
+  ColNumb := Image1.Canvas.Pixels[X, Y]; {The image can't be a JPG}
+  GetRGB(ColNumb, R, G, B);
+
+  RGBLabel.Caption := IntToStr(R);
+end;
+
+procedure TForm1.GetRGB(Col: TColor; var R, G, B: Byte);
+var
+  Color2: $0..$FFFFFFFF;
+begin
+  Color2 := ColorToRGB(Col);
+  R := ($000000FF and Color2);
+  G := ($0000FF00 and Color2) Shr 8;
+  B := ($00FF0000 and Color2) Shr 16;
+end;
 
 end.
 
