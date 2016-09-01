@@ -56,10 +56,13 @@ procedure TForm1.ChooseFileButtonClick(Sender: TObject);
 var
   Filename: string;
 begin
+  ChooseFileDialog.InitialDir := ExtractFilePath(ParamStr(0));
+
   if ChooseFileDialog.Execute then
   begin
     Filename := ChooseFileDialog.Filename;
-    ShowMessage(Filename);
+
+    Image1.Picture.LoadFromFile(Filename);
   end;
 end;
 
