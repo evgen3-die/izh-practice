@@ -21,6 +21,7 @@ type
     Image1: TImage;
     Panel1: TPanel;
     DiscolorToggle: TToggleBox;
+    ScrollBox1: TScrollBox;
     procedure ChooseFileButtonClick(Sender: TObject);
     procedure Image1MouseMove(Sender: TObject; Shift: TShiftState; X, Y: Integer
       );
