@@ -1,11 +1,12 @@
 object Form1: TForm1
-  Left = 275
+  Left = 456
   Height = 593
-  Top = 167
+  Top = 72
   Width = 800
   Caption = 'Form1'
   ClientHeight = 593
   ClientWidth = 800
+  OnCreate = FormCreate
   LCLVersion = '1.6.0.4'
   object Panel1: TPanel
     Left = 579
@@ -31,6 +32,7 @@ object Form1: TForm1
       Top = 24
       Width = 80
       Caption = 'Сохранить'
+      OnClick = SaveFileButtonClick
       TabOrder = 1
     end
     object Label1: TLabel
@@ -54,7 +56,17 @@ object Form1: TForm1
       Top = 95
       Width = 186
       Caption = 'Обесцветить'
+      OnChange = DiscolorToggleChange
       TabOrder = 2
+    end
+    object resizeImage: TButton
+      Left = 16
+      Height = 25
+      Top = 136
+      Width = 187
+      Caption = 'Изменить размер'
+      OnClick = resizeImageClick
+      TabOrder = 3
     end
   end
   object ScrollBox1: TScrollBox
@@ -6899,7 +6911,11 @@ object Form1: TForm1
   end
   object ChooseFileDialog: TOpenDialog
     Filter = 'JPG|*.jpg|BMP|*.bmp'
-    left = 672
+    left = 608
+    top = 520
+  end
+  object SavePictureDialog1: TSavePictureDialog
+    left = 736
     top = 520
   end
 end
