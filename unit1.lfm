@@ -50,23 +50,14 @@ object Form1: TForm1
       Width = 1
       ParentColor = False
     end
-    object DiscolorToggle: TToggleBox
-      Left = 16
-      Height = 23
-      Top = 95
-      Width = 186
-      Caption = 'Обесцветить'
-      OnChange = DiscolorToggleChange
-      TabOrder = 2
-    end
     object resizeImage: TButton
       Left = 16
       Height = 25
       Top = 136
-      Width = 187
+      Width = 184
       Caption = 'Изменить размер'
       OnClick = resizeImageClick
-      TabOrder = 3
+      TabOrder = 2
     end
   end
   object ScrollBox1: TScrollBox
@@ -6911,6 +6902,15 @@ object Form1: TForm1
       Proportional = True
       Stretch = True
     end
+  end
+  object resizeImage1: TButton
+    Left = 595
+    Height = 25
+    Top = 96
+    Width = 181
+    Caption = 'Обесцветить'
+    OnClick = resizeImageClick
+    TabOrder = 2
   end
   object ChooseFileDialog: TOpenDialog
     Filter = 'JPG|*.jpg|BMP|*.bmp'

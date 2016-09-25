@@ -17,14 +17,13 @@ type
     ChooseFileButton: TButton;
     Label1: TLabel;
     ChooseFileDialog: TOpenDialog;
+    resizeImage1: TButton;
     RGBLabel: TLabel;
     SaveFileButton: TButton;
     Image1: TImage;
     Panel1: TPanel;
-    DiscolorToggle: TToggleBox;
     SavePictureDialog1: TSavePictureDialog;
     ScrollBox1: TScrollBox;
-    procedure DiscolorToggleChange(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure resizeImageClick(Sender: TObject);
     procedure ChooseFileButtonClick(Sender: TObject);
@@ -32,6 +31,7 @@ type
     procedure GetRGB(Col: TColor; var R, G, B: Byte);
     procedure Image1Resize(Sender: TObject);
     procedure SaveFileButtonClick(Sender: TObject);
+    procedure BitmapToGrayscale(Bitmap: TBitmap);
   private
     { private declarations }
   public
@@ -74,13 +74,17 @@ begin
 end;
 
 procedure TForm1.resizeImageClick(Sender: TObject);
+var
+   Bmp: TBitmap;
 begin
+  Bmp := TBitmap.Create;
+  Bmp.Width := Image1.Picture.Width;
+  Bmp.Height := Image1.Picture.Height;
+  Bmp.Canvas.Draw(0, 0, Image1.Picture.Graphic);
 
-end;
+  BitmapToGrayscale(Bmp);
 
-procedure TForm1.DiscolorToggleChange(Sender: TObject);
-begin
-
+  Image1.Picture.Bitmap := Bmp;
 end;
 
 procedure TForm1.FormCreate(Sender: TObject);
@@ -108,5 +112,21 @@ begin
   if SavePictureDialog1.Execute then
          Image1.Picture.SaveToFile(SavePictureDialog1.FileName);
 end;
+
+procedure TForm1.BitmapToGrayscale(Bitmap: TBitmap);
+var
+  x, y, Color3: integer;
+begin;
+  with Bitmap do
+    for y:=0 to Height-1 do
+      for x:=0 to Width-1 do begin;
+        Color3:=Canvas.Pixels[x, y];
+        Canvas.Pixels[x, y]:=((77 * (Color3        and $FF)  //Red
+                            + 150 * (Color3 shr 8  and $FF)  //Green
+                             + 29 * (Color3 shr 16 and $FF)  //Blue
+                              ) shr 8
+                             ) * $00010101;
+        end;
+  end;
 
 end.
