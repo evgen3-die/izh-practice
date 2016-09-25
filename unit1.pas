@@ -26,6 +26,7 @@ type
     procedure Image1MouseMove(Sender: TObject; Shift: TShiftState; X, Y: Integer
       );
     procedure GetRGB(Col: TColor; var R, G, B: Byte);
+    procedure Image1Resize(Sender: TObject);
   private
     { private declarations }
   public
@@ -75,6 +76,11 @@ begin
   R := ($000000FF and Color2);
   G := ($0000FF00 and Color2) Shr 8;
   B := ($00FF0000 and Color2) Shr 16;
+end;
+
+procedure TForm1.Image1Resize(Sender: TObject);
+begin
+
 end;
 
 end.

@@ -1,7 +1,7 @@
 object Form1: TForm1
-  Left = 275
+  Left = 319
   Height = 593
-  Top = 167
+  Top = 163
   Width = 800
   Caption = 'Form1'
   ClientHeight = 593
@@ -67,6 +67,8 @@ object Form1: TForm1
     Align = alClient
     ClientHeight = 589
     ClientWidth = 575
+    Color = clWhite
+    ParentColor = False
     TabOrder = 1
     object Image1: TImage
       Left = 0
@@ -76,6 +78,7 @@ object Form1: TForm1
       AutoSize = True
       Center = True
       OnMouseMove = Image1MouseMove
+      OnResize = Image1Resize
       Picture.Data = {
         0A544A706567496D616765BE530300FFD8FFE111B84578696600004D4D002A00
         000008000C010000030000000108000000010100030000000106560000010200
