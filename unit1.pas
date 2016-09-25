@@ -6,13 +6,14 @@ interface
 
 uses
   Classes, SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs, ExtCtrls,
-  StdCtrls;
+  StdCtrls, ExtDlgs, ComCtrls, GraphType, LazUTF8, LResources;
 
 type
 
   { TForm1 }
 
   TForm1 = class(TForm)
+    resizeImage: TButton;
     ChooseFileButton: TButton;
     Label1: TLabel;
     ChooseFileDialog: TOpenDialog;
@@ -21,12 +22,16 @@ type
     Image1: TImage;
     Panel1: TPanel;
     DiscolorToggle: TToggleBox;
+    SavePictureDialog1: TSavePictureDialog;
     ScrollBox1: TScrollBox;
+    procedure DiscolorToggleChange(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure resizeImageClick(Sender: TObject);
     procedure ChooseFileButtonClick(Sender: TObject);
-    procedure Image1MouseMove(Sender: TObject; Shift: TShiftState; X, Y: Integer
-      );
+    procedure Image1MouseMove(Sender: TObject; Shift: TShiftState; X, Y: Integer);
     procedure GetRGB(Col: TColor; var R, G, B: Byte);
     procedure Image1Resize(Sender: TObject);
+    procedure SaveFileButtonClick(Sender: TObject);
   private
     { private declarations }
   public
@@ -38,7 +43,7 @@ var
 
 implementation
 
-{$R *.lfm}
+{$R Unit1.lfm}
 
 { TForm1 }
 
@@ -68,6 +73,21 @@ begin
   end;
 end;
 
+procedure TForm1.resizeImageClick(Sender: TObject);
+begin
+
+end;
+
+procedure TForm1.DiscolorToggleChange(Sender: TObject);
+begin
+
+end;
+
+procedure TForm1.FormCreate(Sender: TObject);
+begin
+
+end;
+
 procedure TForm1.GetRGB(Col: TColor; var R, G, B: Byte);
 var
   Color2: $0..$FFFFFFFF;
@@ -83,5 +103,10 @@ begin
 
 end;
 
-end.
+procedure TForm1.SaveFileButtonClick(Sender: TObject);
+begin
+  if SavePictureDialog1.Execute then
+         Image1.Picture.SaveToFile(SavePictureDialog1.FileName);
+end;
 
+end.
