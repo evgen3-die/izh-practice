@@ -6918,6 +6918,7 @@ object Form1: TForm1
     top = 520
   end
   object SavePictureDialog1: TSavePictureDialog
+    Filter = 'JPG|*.jpg|BMP|*.bmp'
     left = 736
     top = 520
   end
