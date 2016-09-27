@@ -13,6 +13,12 @@ type
   { TForm1 }
 
   TForm1 = class(TForm)
+    height_image: TEdit;
+    Label2: TLabel;
+    Label3: TLabel;
+    Label4: TLabel;
+    width_image: TEdit;
+    resizeButton: TButton;
     resizeImage: TButton;
     ChooseFileButton: TButton;
     Label1: TLabel;
@@ -25,6 +31,7 @@ type
     SavePictureDialog1: TSavePictureDialog;
     ScrollBox1: TScrollBox;
     procedure FormCreate(Sender: TObject);
+    procedure resizeButtonClick(Sender: TObject);
     procedure resizeImageClick(Sender: TObject);
     procedure ChooseFileButtonClick(Sender: TObject);
     procedure Image1MouseMove(Sender: TObject; Shift: TShiftState; X, Y: Integer);
@@ -32,6 +39,7 @@ type
     procedure Image1Resize(Sender: TObject);
     procedure SaveFileButtonClick(Sender: TObject);
     procedure BitmapToGrayscale(Bitmap: TBitmap);
+    function ResizeBitmap(BmpIn : TBitmap; NewWidth, NewHeight : Integer) : TBitmap;
   private
     { private declarations }
   public
@@ -92,6 +100,22 @@ begin
 
 end;
 
+procedure TForm1.resizeButtonClick(Sender: TObject);
+var
+  Bmp: TBitmap;
+  widthImg, heightImg: Integer;
+begin
+  Bmp := TBitmap.Create;
+  Bmp.Width := Image1.Picture.Width;
+  Bmp.Height := Image1.Picture.Height;
+  Bmp.Canvas.Draw(0, 0, Image1.Picture.Graphic);
+
+  widthImg := StrToInt(width_image.text);
+  heightImg := StrToInt(height_image.text);
+
+  Image1.Picture.Bitmap := ResizeBitmap(Bmp, widthImg, heightImg);
+end;
+
 procedure TForm1.GetRGB(Col: TColor; var R, G, B: Byte);
 var
   Color2: $0..$FFFFFFFF;
@@ -129,4 +153,20 @@ begin;
         end;
   end;
 
+function TForm1.ResizeBitmap(BmpIn : TBitmap; NewWidth, NewHeight : Integer) : TBitmap;
+begin
+Result := TBitmap.Create;
+try
+Result.Width := NewWidth;
+Result.Height := NewHeight;
+Result.PixelFormat := BmpIn.PixelFormat;
+Result.Canvas.StretchDraw(Rect(0, 0, Result.Width, Result.Height), BmpIn);
+except
+Result.Free;
+end;
+end;
+
 end.
+
+
+
