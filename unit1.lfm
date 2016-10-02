@@ -1,7 +1,7 @@
 object Form1: TForm1
-  Left = 456
+  Left = 405
   Height = 593
-  Top = 72
+  Top = 128
   Width = 800
   Caption = 'Form1'
   ClientHeight = 593
@@ -50,15 +50,6 @@ object Form1: TForm1
       Width = 1
       ParentColor = False
     end
-    object resizeImage: TButton
-      Left = 16
-      Height = 25
-      Top = 136
-      Width = 184
-      Caption = 'Изменить размер'
-      OnClick = resizeImageClick
-      TabOrder = 2
-    end
     object resizeButton: TButton
       Left = 19
       Height = 25
@@ -66,14 +57,14 @@ object Form1: TForm1
       Width = 178
       Caption = 'Изменить размер'
       OnClick = resizeButtonClick
-      TabOrder = 3
+      TabOrder = 2
     end
     object width_image: TEdit
       Left = 23
       Height = 23
       Top = 235
       Width = 60
-      TabOrder = 4
+      TabOrder = 3
       Text = '200'
     end
     object height_image: TEdit
@@ -81,7 +72,7 @@ object Form1: TForm1
       Height = 23
       Top = 236
       Width = 60
-      TabOrder = 5
+      TabOrder = 4
       Text = '200'
     end
     object Label2: TLabel
@@ -108,6 +99,65 @@ object Form1: TForm1
       Caption = 'X'
       ParentColor = False
     end
+    object CutLeftTop: TButton
+      Left = 21
+      Height = 25
+      Top = 296
+      Width = 25
+      Caption = '↖'
+      Enabled = False
+      OnClick = CutPositionButtonClick
+      TabOrder = 5
+    end
+    object Label5: TLabel
+      Left = 22
+      Height = 15
+      Top = 278
+      Width = 135
+      Caption = 'Направление обрезания'
+      ParentColor = False
+    end
+    object Label6: TLabel
+      Left = 24
+      Height = 15
+      Top = 423
+      Width = 110
+      Caption = 'Размеры обрезания'
+      ParentColor = False
+    end
+    object CutButton: TButton
+      Left = 25
+      Height = 25
+      Top = 480
+      Width = 75
+      Caption = 'Обрезать'
+      OnClick = CutButtonClick
+      TabOrder = 6
+    end
+    object Label7: TLabel
+      Left = 91
+      Height = 15
+      Top = 456
+      Width = 12
+      Caption = 'px'
+      ParentColor = False
+    end
+    object Label8: TLabel
+      Left = 192
+      Height = 15
+      Top = 456
+      Width = 12
+      Caption = 'px'
+      ParentColor = False
+    end
+    object Label9: TLabel
+      Left = 112
+      Height = 15
+      Top = 456
+      Width = 7
+      Caption = 'X'
+      ParentColor = False
+    end
   end
   object ScrollBox1: TScrollBox
     Left = 0
@@ -130,7 +180,6 @@ object Form1: TForm1
       AutoSize = True
       Center = True
       OnMouseMove = Image1MouseMove
-      OnResize = Image1Resize
       Picture.Data = {
         0A544A706567496D616765BE530300FFD8FFE111B84578696600004D4D002A00
         000008000C010000030000000108000000010100030000000106560000010200
@@ -6960,6 +7009,94 @@ object Form1: TForm1
     Caption = 'Обесцветить'
     OnClick = resizeImageClick
     TabOrder = 2
+  end
+  object CutTop: TButton
+    Left = 640
+    Height = 25
+    Top = 296
+    Width = 25
+    Caption = '↑'
+    OnClick = CutPositionButtonClick
+    TabOrder = 3
+  end
+  object CutRightTop: TButton
+    Left = 680
+    Height = 25
+    Top = 296
+    Width = 25
+    Caption = '↗'
+    OnClick = CutPositionButtonClick
+    TabOrder = 4
+  end
+  object CutLeft: TButton
+    Left = 600
+    Height = 25
+    Top = 336
+    Width = 25
+    Caption = '←'
+    OnClick = CutPositionButtonClick
+    TabOrder = 5
+  end
+  object CutRight: TButton
+    Left = 680
+    Height = 25
+    Top = 336
+    Width = 25
+    Caption = '→'
+    OnClick = CutPositionButtonClick
+    TabOrder = 6
+  end
+  object CutCenter: TButton
+    Left = 640
+    Height = 25
+    Top = 336
+    Width = 25
+    Caption = '⬩'
+    OnClick = CutPositionButtonClick
+    TabOrder = 7
+  end
+  object CutRightBottom: TButton
+    Left = 680
+    Height = 25
+    Top = 376
+    Width = 25
+    Caption = '↘'
+    OnClick = CutPositionButtonClick
+    TabOrder = 8
+  end
+  object CutBottom: TButton
+    Left = 640
+    Height = 25
+    Top = 376
+    Width = 25
+    Caption = '↓'
+    OnClick = CutPositionButtonClick
+    TabOrder = 9
+  end
+  object CutLeftBottom: TButton
+    Left = 600
+    Height = 25
+    Top = 376
+    Width = 25
+    Caption = '↙'
+    OnClick = CutPositionButtonClick
+    TabOrder = 10
+  end
+  object CutWidth: TEdit
+    Left = 608
+    Height = 23
+    Top = 448
+    Width = 60
+    TabOrder = 11
+    Text = '200'
+  end
+  object CutHeight: TEdit
+    Left = 708
+    Height = 23
+    Top = 449
+    Width = 60
+    TabOrder = 12
+    Text = '200'
   end
   object ChooseFileDialog: TOpenDialog
     Filter = 'JPG|*.jpg|BMP|*.bmp'

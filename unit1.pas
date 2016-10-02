@@ -13,13 +13,28 @@ type
   { TForm1 }
 
   TForm1 = class(TForm)
+    CutLeftTop: TButton;
+    CutButton: TButton;
+    CutTop: TButton;
+    CutRightTop: TButton;
+    CutLeft: TButton;
+    CutRight: TButton;
+    CutCenter: TButton;
+    CutRightBottom: TButton;
+    CutBottom: TButton;
+    CutLeftBottom: TButton;
     height_image: TEdit;
+    CutHeight: TEdit;
     Label2: TLabel;
     Label3: TLabel;
     Label4: TLabel;
+    Label5: TLabel;
+    Label6: TLabel;
+    Label7: TLabel;
+    Label8: TLabel;
+    Label9: TLabel;
     width_image: TEdit;
     resizeButton: TButton;
-    resizeImage: TButton;
     ChooseFileButton: TButton;
     Label1: TLabel;
     ChooseFileDialog: TOpenDialog;
@@ -30,13 +45,15 @@ type
     Panel1: TPanel;
     SavePictureDialog1: TSavePictureDialog;
     ScrollBox1: TScrollBox;
+    CutWidth: TEdit;
+    procedure CutButtonClick(Sender: TObject);
+    procedure CutPositionButtonClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure resizeButtonClick(Sender: TObject);
     procedure resizeImageClick(Sender: TObject);
     procedure ChooseFileButtonClick(Sender: TObject);
     procedure Image1MouseMove(Sender: TObject; Shift: TShiftState; X, Y: Integer);
     procedure GetRGB(Col: TColor; var R, G, B: Byte);
-    procedure Image1Resize(Sender: TObject);
     procedure SaveFileButtonClick(Sender: TObject);
     procedure BitmapToGrayscale(Bitmap: TBitmap);
     function ResizeBitmap(BmpIn : TBitmap; NewWidth, NewHeight : Integer) : TBitmap;
@@ -48,6 +65,7 @@ type
 
 var
   Form1: TForm1;
+  CutPosition: String;
 
 implementation
 
@@ -97,7 +115,65 @@ end;
 
 procedure TForm1.FormCreate(Sender: TObject);
 begin
+     CutPosition := 'CutLeftTop';
+end;
 
+procedure TForm1.CutPositionButtonClick(Sender: TObject);
+begin
+     TButton(FindComponent(CutPosition)).Enabled := true;
+
+     CutPosition := TButton(Sender).Name;
+     TButton(Sender).Enabled := false;
+
+end;
+
+procedure TForm1.CutButtonClick(Sender: TObject);
+var r: Trect;
+   w, h, x, y: integer;
+   Bmp : TBitmap;
+begin
+    x := 0;
+    y := 0;
+
+    w := strToInt(CutWidth.text);
+    h := strToInt(CutHeight.text);
+
+    case CutPosition of
+      'CutTop' : begin
+          x := Image1.width div 2 - w div 2;
+       end;
+      'CutRightTop' : begin
+          x := Image1.width - w;
+       end;
+      'CutRight' : begin
+          x := Image1.width - w;
+          y := Image1.height div 2 - h div 2;
+       end;
+      'CutRightBottom' : begin
+          x := Image1.width - w;
+          y := Image1.height - h;
+       end;
+      'CutBottom' : begin
+          x := Image1.width div 2 - w div 2;
+          y := Image1.height - h;
+       end;
+      'CutLeftBottom' : begin
+          y := Image1.height - h;
+       end;
+      'CutCenter' : begin
+          x := Image1.width div 2 - w div 2;
+          y := Image1.height div 2 - h div 2;
+       end;
+    end;
+
+  Bmp := TBitmap.Create;
+
+  Bmp.Width:=w;
+  Bmp.Height:=h;
+
+  Bmp.Canvas.CopyRect(Rect(0,0,w,h), Image1.Canvas, Rect(x,y,x+w,y+h));
+
+  Image1.Picture.Bitmap.Assign(Bmp);
 end;
 
 procedure TForm1.resizeButtonClick(Sender: TObject);
@@ -124,11 +200,6 @@ begin
   R := ($000000FF and Color2);
   G := ($0000FF00 and Color2) Shr 8;
   B := ($00FF0000 and Color2) Shr 16;
-end;
-
-procedure TForm1.Image1Resize(Sender: TObject);
-begin
-
 end;
 
 procedure TForm1.SaveFileButtonClick(Sender: TObject);
